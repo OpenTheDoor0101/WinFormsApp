@@ -109,7 +109,7 @@ namespace DershaneOtomasyonEkranlari
 
         }
 
-        SqlConnection sqlBaglanti = new SqlConnection(@"Data Source=DESKTOP-R1R5QMJ\SQLEXPRESS;Initial Catalog=StajProjesiOgrenciKayitOtomasyonuDB;Integrated Security=True; MultipleActiveResultSets=True;");
+        SqlConnection sqlBaglanti = new SqlConnection(@"Data Source=Minuteman-III\SQLEXPRESS;Initial Catalog=StajProjesiOgrenciKayitOtomasyonuDB;Integrated Security=True; MultipleActiveResultSets=True;");
 
         public void btnPers_Click(object sender, EventArgs e) //Personel dinamik buton click olayı
         {

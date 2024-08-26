@@ -18,7 +18,7 @@ namespace DershaneOtomasyonEkranlari
             InitializeComponent();
         }
 
-        SqlConnection sqlBaglanti = new SqlConnection(@"Data Source=DESKTOP-R1R5QMJ\SQLEXPRESS;Initial Catalog=StajProjesiOgrenciKayitOtomasyonuDB;Integrated Security=True");
+        SqlConnection sqlBaglanti = new SqlConnection(@"Data Source=Minuteman-III\SQLEXPRESS;Initial Catalog=StajProjesiOgrenciKayitOtomasyonuDB;Integrated Security=True");
 
         private void FormPersonelKayitEkrani_Load(object sender, EventArgs e)
         {

@@ -13,7 +13,7 @@ namespace DershaneOtomasyonEkranlari
 {
     public partial class FormMakbuz : Form
     {
-        SqlConnection sqlBaglanti = new SqlConnection(@"Data Source=DESKTOP-R1R5QMJ\SQLEXPRESS;Initial Catalog=StajProjesiOgrenciKayitOtomasyonuDB;Integrated Security=True; MultipleActiveResultSets=True;");
+        SqlConnection sqlBaglanti = new SqlConnection(@"Data Source=Minuteman-III\SQLEXPRESS;Initial Catalog=StajProjesiOgrenciKayitOtomasyonuDB;Integrated Security=True; MultipleActiveResultSets=True;");
 
         public FormMakbuz()
         {
