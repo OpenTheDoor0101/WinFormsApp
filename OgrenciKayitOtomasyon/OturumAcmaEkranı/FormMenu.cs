@@ -566,6 +566,23 @@ namespace DershaneOtomasyonEkranlari
                 {
                     sqlBaglanti.Open();
 
+                    /*Bu sql komutları if sorgusunda veri tabanından gelen bilgileri kontrol ederek doğru bilgiyi almak için var. Önceden aşağıdaki işlemde olan
+                      değerler kullanılarak if sorgusu yapılıyordu fakat if sorgusundan önce işlem yapılduığı için taksitlerin hepsi ödenmek istediği zaman bug 
+                      ortaya çıkıyordu: Ödenecek borç yoktur uyarısı gelmesine rağmen borçlar duruyordu.*/
+                    string sqlYillikUcretOgrenme = "select KalanYillikTutar from OgrenciKayitBilgileri WHERE OgrenciNo = '" + textBoxOgrNo.Text + "' ";
+                    SqlCommand sqlCommandYillikUcretOgrenme = new SqlCommand(sqlYillikUcretOgrenme, sqlBaglanti);
+                    object yillikUcretObj = sqlCommandYillikUcretOgrenme.ExecuteScalar();
+                    decimal kalanYillikTutar = yillikUcretObj != null ? Convert.ToDecimal(yillikUcretObj) : 0;
+
+                    /*Bu sql komutları if sorgusunda veri tabanından gelen bilgileri kontrol ederek doğru bilgiyi almak için var. Önceden aşağıdaki işlemde olan
+                      değerler kullanılarak if sorgusu yapılıyordu fakat if sorgusundan önce işlem yapılduığı için taksitlerin hepsi ödenmek istediği zaman bug 
+                      ortaya çıkıyordu: Ödenecek borç yoktur uyarısı gelmesine rağmen borçlar duruyordu.*/
+                    string sqlKalanTaksitOgrenme = "select KalanTaksitSayisi from OgrenciKayitBilgileri WHERE OgrenciNo = '" + textBoxOgrNo.Text + "' ";
+                    SqlCommand sqlCommandKalanTaksitOgrenme = new SqlCommand(sqlKalanTaksitOgrenme, sqlBaglanti);
+                    object kalanTaksitObj = sqlCommandKalanTaksitOgrenme.ExecuteScalar();
+                    decimal kalanYillikTaksit = kalanTaksitObj != null ? Convert.ToDecimal(kalanTaksitObj) : 0;
+
+
                     decimal aylikUcret = Convert.ToDecimal(textBoxAylikUcret.Text);
                     decimal kalanYillikUcret = Convert.ToDecimal(textBoxYillikKalanUcret.Text);
                     int kalanTaksitSayisi = Convert.ToInt32(textBoxKalanTaksit.Text);
@@ -575,9 +592,9 @@ namespace DershaneOtomasyonEkranlari
                     decimal kalanYUK = (decimal)kalanYillikUcret - (OdenecekTaksit * aylikUcret);
                     int kalanTaksit = kalanTaksitSayisi - OdenecekTaksit;
 
-                    if (kalanYUK == 0)
+                    if (kalanYillikTutar == 0)
                     {
-                        if (kalanTaksit == 0)
+                        if (kalanYillikTaksit == 0)
                         {
                             MessageBox.Show("Ödenecek borç bulunmamaktadır.");
                             return;
